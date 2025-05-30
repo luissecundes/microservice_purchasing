@@ -14,7 +14,7 @@ public class PurchaseOrdersService {
     public PurchaseOrdersService(PurchaseOrdersRepository purchaseOrdersRepository) {
         this.purchaseOrdersRepository = purchaseOrdersRepository;
     }
- 
+
     public PurchaseOrdersEntity savePurchaseOrder(PurchaseOrdersEntity purchaseOrder) {
         return purchaseOrdersRepository.save(purchaseOrder);
     }
