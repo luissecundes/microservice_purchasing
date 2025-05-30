@@ -22,7 +22,6 @@ import java.time.LocalDate;
 @Where(clause = "deleted_at IS NULL")
 public class PurchaseOrdersEntity {
 
-    // teste de commit
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
