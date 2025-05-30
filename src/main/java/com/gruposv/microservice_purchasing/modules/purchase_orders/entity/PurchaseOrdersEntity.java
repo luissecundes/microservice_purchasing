@@ -39,11 +39,9 @@ public class PurchaseOrdersEntity {
     @Column(name = "expected_delivery_date")
     private LocalDate expectedDeliveryDate;
 
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 20)
     private PurchaseOrderStatus status;
-
 
     @Column(name = "total_amount", precision = 12, scale = 2)
     private BigDecimal totalAmount;
