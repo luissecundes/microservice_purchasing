@@ -8,7 +8,7 @@ import com.gruposv.microservice_purchasing.modules.supplier_documents.entity.Sup
 import com.gruposv.microservice_purchasing.modules.supplier_documents.service.SupplierDocumentsService;
 
 @RestController
-@RequestMapping("/api/suppliers")
+@RequestMapping("/api/suppliers-documents")
 public class SupplierDocumentsController {
 
     private final SupplierDocumentsService supplierDocumentsService;
