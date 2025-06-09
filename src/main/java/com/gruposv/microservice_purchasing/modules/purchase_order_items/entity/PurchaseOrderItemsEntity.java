@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_purchase_order_items")
-@Where(clause = "deleted_at IS NULL")
 public class PurchaseOrderItemsEntity {
 
     @Id

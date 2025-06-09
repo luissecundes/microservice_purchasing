@@ -20,7 +20,6 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_suppliers_documents")
-@Where(clause = "deleted_at IS NULL")
 public class SupplierDocumentsEntity {
 
     @Id
@@ -40,15 +39,4 @@ public class SupplierDocumentsEntity {
 
     @Column(name = "file_path", length = 255)
     private String filePath;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
 }

@@ -5,6 +5,8 @@ import com.gruposv.microservice_purchasing.modules.purchase_order_items.reposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PurchaseOrderItemsService {
 
@@ -17,5 +19,13 @@ public class PurchaseOrderItemsService {
 
     public PurchaseOrderItemsEntity save(PurchaseOrderItemsEntity item) {
         return repository.save(item);
+    }
+
+    public List<PurchaseOrderItemsEntity> findAll() {
+        return repository.findAll();
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 }

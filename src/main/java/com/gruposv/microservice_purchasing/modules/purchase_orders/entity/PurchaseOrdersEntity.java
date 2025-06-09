@@ -19,7 +19,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_purchase_orders")
-@Where(clause = "deleted_at IS NULL")
 public class PurchaseOrdersEntity {
 
     @Id
@@ -51,10 +50,5 @@ public class PurchaseOrdersEntity {
 
     @Column(name = "payment_terms", length = 100)
     private String paymentTerms;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    
 }

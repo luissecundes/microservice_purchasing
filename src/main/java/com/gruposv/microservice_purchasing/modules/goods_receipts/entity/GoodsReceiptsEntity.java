@@ -41,9 +41,4 @@ public class GoodsReceiptsEntity {
     @Column(name = "status", length = 30)
     private GoodsReceiptStatus status;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 }
