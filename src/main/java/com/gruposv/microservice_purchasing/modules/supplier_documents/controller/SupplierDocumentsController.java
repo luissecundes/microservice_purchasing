@@ -1,5 +1,7 @@
 package com.gruposv.microservice_purchasing.modules.supplier_documents.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,5 +24,20 @@ public class SupplierDocumentsController {
     public ResponseEntity<SupplierDocumentsEntity> createSupplier(@RequestBody SupplierDocumentsEntity supplierDocuments) {
         SupplierDocumentsEntity savedSupplier = supplierDocumentsService.saveSupplierDocuments(supplierDocuments);
         return ResponseEntity.ok(savedSupplier);
+    }
+
+
+    // GET ALL
+    @GetMapping
+    public ResponseEntity<List<SupplierDocumentsEntity>> getAllSupplierDocuments() {
+        List<SupplierDocumentsEntity> documents = supplierDocumentsService.getAllSupplierDocuments();
+        return ResponseEntity.ok(documents);
+    }
+
+    // DELETE com mensagem
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteSupplierDocuments(@PathVariable Long id) {
+        supplierDocumentsService.deleteSupplierDocuments(id);
+        return ResponseEntity.ok("Documento do fornecedor com id " + id + " deletado com sucesso.");
     }
 }

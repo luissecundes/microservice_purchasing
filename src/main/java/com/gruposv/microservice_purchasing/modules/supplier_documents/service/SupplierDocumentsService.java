@@ -1,6 +1,9 @@
 package com.gruposv.microservice_purchasing.modules.supplier_documents.service;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gruposv.microservice_purchasing.modules.supplier_documents.entity.SupplierDocumentsEntity;
@@ -18,5 +21,15 @@ public class SupplierDocumentsService {
 
     public SupplierDocumentsEntity saveSupplierDocuments(SupplierDocumentsEntity supplierDocuments) {
         return supplierDocumentsRepository.save(supplierDocuments);
+    }
+    
+      // GET ALL
+      public List<SupplierDocumentsEntity> getAllSupplierDocuments() {
+        return supplierDocumentsRepository.findAll();
+    }
+
+    // DELETE
+    public void deleteSupplierDocuments(Long id) {
+        supplierDocumentsRepository.deleteById(id);
     }
 }
