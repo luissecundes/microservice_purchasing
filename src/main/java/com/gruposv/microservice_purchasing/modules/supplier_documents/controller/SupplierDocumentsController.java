@@ -2,6 +2,7 @@ package com.gruposv.microservice_purchasing.modules.supplier_documents.controlle
 
 import java.util.List;
 
+import com.gruposv.microservice_purchasing.modules.supplier_documents.dto.SupplierDocumentsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +28,12 @@ public class SupplierDocumentsController {
     }
 
 
-    // GET ALL
     @GetMapping
-    public ResponseEntity<List<SupplierDocumentsEntity>> getAllSupplierDocuments() {
-        List<SupplierDocumentsEntity> documents = supplierDocumentsService.getAllSupplierDocuments();
+    public ResponseEntity<List<SupplierDocumentsDTO>> getAllSupplierDocuments() {
+        List<SupplierDocumentsDTO> documents = supplierDocumentsService.getAllSupplierDocumentsDTO();
         return ResponseEntity.ok(documents);
     }
+
 
     // DELETE com mensagem
     @DeleteMapping("/{id}")
