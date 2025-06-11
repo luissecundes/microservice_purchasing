@@ -1,9 +1,12 @@
 package com.gruposv.microservice_purchasing.modules.supplier_documents.service;
 
+import com.gruposv.microservice_purchasing.modules.supplier.entity.SupplierEntity;
 import com.gruposv.microservice_purchasing.modules.supplier_documents.dto.SupplierDocumentsDTO;
 import com.gruposv.microservice_purchasing.modules.supplier_documents.mapper.SupplierDocumentsMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +38,34 @@ public class SupplierDocumentsService {
                 .toList();
     }
 
+    @Transactional
+    public SupplierDocumentsDTO updateSupplierDocuments(Long id, SupplierDocumentsDTO updatedDTO) {
+        SupplierDocumentsEntity existingDocument = supplierDocumentsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Documento não encontrado com id: " + id));
 
+        existingDocument.setDocumentType(updatedDTO.getDocumentType());
+        existingDocument.setValidUntil(updatedDTO.getValidUntil());
+        existingDocument.setFilePath(updatedDTO.getFilePath());
 
-    public void deleteSupplierDocuments(Long id) {
-        supplierDocumentsRepository.deleteById(id);
+        if (!existingDocument.getSupplier().getId().equals(updatedDTO.getSupplierId())) {
+            SupplierEntity newSupplier = new SupplierEntity();
+            newSupplier.setId(updatedDTO.getSupplierId());
+            existingDocument.setSupplier(newSupplier);
+        }
+
+        SupplierDocumentsEntity savedEntity = supplierDocumentsRepository.save(existingDocument);
+
+        return supplierDocumentsMapper.toDTO(savedEntity);
     }
+
+
+    @Transactional
+    public void deleteSupplierDocuments(Long id) {
+        SupplierDocumentsEntity document = supplierDocumentsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Documento não encontrado com id: " + id));
+
+        document.setDeletedAt(LocalDateTime.now());
+        supplierDocumentsRepository.save(document);
+    }
+
 }

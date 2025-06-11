@@ -29,12 +29,6 @@ public class SupplierDocumentsMapper {
 
         SupplierDocumentsEntity entity = new SupplierDocumentsEntity();
         entity.setId(dto.getId());
-
-        // Aqui você vai precisar associar o SupplierEntity em outro ponto,
-        // porque com o DTO você só tem o supplierId.
-        // Em um Service ou Controller, você pode fazer um findById(supplierId)
-        // e associar o SupplierEntity na hora de salvar.
-
         entity.setDocumentType(dto.getDocumentType());
         entity.setValidUntil(dto.getValidUntil());
         entity.setFilePath(dto.getFilePath());

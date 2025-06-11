@@ -27,15 +27,18 @@ public class SupplierDocumentsController {
         return ResponseEntity.ok(savedSupplier);
     }
 
-
     @GetMapping
     public ResponseEntity<List<SupplierDocumentsDTO>> getAllSupplierDocuments() {
         List<SupplierDocumentsDTO> documents = supplierDocumentsService.getAllSupplierDocumentsDTO();
         return ResponseEntity.ok(documents);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<SupplierDocumentsDTO> updateSupplierDocuments(@PathVariable Long id, @RequestBody SupplierDocumentsDTO updatedDTO) {
+        SupplierDocumentsDTO updatedDocument = supplierDocumentsService.updateSupplierDocuments(id, updatedDTO);
+        return ResponseEntity.ok(updatedDocument);
+    }
 
-    // DELETE com mensagem
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSupplierDocuments(@PathVariable Long id) {
         supplierDocumentsService.deleteSupplierDocuments(id);

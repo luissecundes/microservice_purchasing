@@ -1,5 +1,6 @@
 package com.gruposv.microservice_purchasing.modules.supplier_documents.entity;
 
+import com.gruposv.microservice_purchasing.domain.TimestampEntity;
 import com.gruposv.microservice_purchasing.modules.supplier.entity.SupplierEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_suppliers_documents")
-public class SupplierDocumentsEntity {
+public class SupplierDocumentsEntity extends TimestampEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
