@@ -1,5 +1,7 @@
 package com.gruposv.microservice_purchasing.modules.supplier.service;
 
+import com.gruposv.microservice_purchasing.modules.supplier.dto.SupplierDTO;
+import com.gruposv.microservice_purchasing.modules.supplier.mapper.SupplierMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,22 +15,26 @@ import com.gruposv.microservice_purchasing.modules.supplier.repository.SupplierR
 public class SupplierService {
 
     private final SupplierRepository supplierRepository;
+    private final SupplierMapper supplierMapper;
 
     @Autowired
-    public SupplierService(SupplierRepository supplierRepository) {
+    public SupplierService(SupplierRepository supplierRepository,
+                           SupplierMapper supplierMapper) {
         this.supplierRepository = supplierRepository;
+        this.supplierMapper = supplierMapper;
     }
 
     public SupplierEntity saveSupplier(SupplierEntity supplier) {
         return supplierRepository.save(supplier);
     }
 
-     // GET ALL
-     public List<SupplierEntity> getAllSuppliers() {
-        return supplierRepository.findAll();
+    public List<SupplierDTO> getAllSuppliersDTO() {
+        List<SupplierEntity> entities = supplierRepository.findAll();
+        return entities.stream()
+                .map(supplierMapper::toDTO)
+                .toList();
     }
 
-    // DELETE
     public void deleteSupplier(Long id) {
         supplierRepository.deleteById(id);
     }
