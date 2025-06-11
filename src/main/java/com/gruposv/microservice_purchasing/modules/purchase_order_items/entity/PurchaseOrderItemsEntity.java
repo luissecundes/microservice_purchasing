@@ -26,16 +26,13 @@ public class PurchaseOrderItemsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relacionamento com a ordem de compra
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id", nullable = false)
     private PurchaseOrdersEntity purchaseOrder;
 
-    // Referência para produto (caso venha de outro serviço)
     @Column(name = "product_id")
     private Long productId;
 
-    // Descrição do item (caso não haja productId)
     @Column(name = "description", length = 255)
     private String description;
 

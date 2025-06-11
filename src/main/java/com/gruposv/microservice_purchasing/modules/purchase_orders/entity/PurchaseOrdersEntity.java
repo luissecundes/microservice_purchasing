@@ -1,5 +1,6 @@
 package com.gruposv.microservice_purchasing.modules.purchase_orders.entity;
 
+import com.gruposv.microservice_purchasing.domain.TimestampEntity;
 import com.gruposv.microservice_purchasing.modules.purchase_orders.enums.PurchaseOrderStatus;
 import com.gruposv.microservice_purchasing.modules.supplier.entity.SupplierEntity;
 import jakarta.persistence.*;
@@ -19,8 +20,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_purchase_orders")
-public class PurchaseOrdersEntity {
-// comentário
+public class PurchaseOrdersEntity extends TimestampEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,6 +1,7 @@
 package com.gruposv.microservice_purchasing.modules.purchase_orders.controller;
 
 
+import com.gruposv.microservice_purchasing.modules.purchase_orders.dto.PurchaseOrderDTO;
 import com.gruposv.microservice_purchasing.modules.purchase_orders.entity.PurchaseOrdersEntity;
 import com.gruposv.microservice_purchasing.modules.purchase_orders.service.PurchaseOrdersService;
 
@@ -18,8 +19,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
 
 @RestController
 @RequestMapping("/api/purchase-orders")
@@ -39,8 +38,8 @@ public class PurchaseOrdersController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PurchaseOrdersEntity>> getAll() {
-        return ResponseEntity.ok(purchaseOrdersService.getAll());
+    public ResponseEntity<List<PurchaseOrderDTO>> getAll() {
+        return ResponseEntity.ok(purchaseOrdersService.getAllDTO());
     }
 
     @DeleteMapping("/{id}")
