@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tb_purchase_orders")
 public class PurchaseOrdersEntity {
-
+// comentário
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
