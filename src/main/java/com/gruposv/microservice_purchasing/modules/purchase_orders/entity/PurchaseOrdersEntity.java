@@ -50,5 +50,4 @@ public class PurchaseOrdersEntity {
 
     @Column(name = "payment_terms", length = 100)
     private String paymentTerms;
-    //add comments para teste
 }
