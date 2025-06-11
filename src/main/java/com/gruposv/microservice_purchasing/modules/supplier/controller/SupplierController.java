@@ -33,6 +33,14 @@ public class SupplierController {
         return ResponseEntity.ok(suppliers);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<SupplierDTO> updateSupplier(@PathVariable Long id, @RequestBody SupplierEntity updatedSupplier) {
+        SupplierDTO savedSupplierDTO = supplierService.updateSupplier(id, updatedSupplier);
+        return ResponseEntity.ok(savedSupplierDTO);
+    }
+
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSupplier(@PathVariable Long id) {
         supplierService.deleteSupplier(id);

@@ -38,6 +38,27 @@ public class SupplierService {
     }
 
     @Transactional
+    public SupplierDTO updateSupplier(Long id, SupplierEntity updatedSupplierData) {
+        SupplierEntity existingSupplier = supplierRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Fornecedor não encontrado com id: " + id));
+
+        existingSupplier.setName(updatedSupplierData.getName());
+        existingSupplier.setDocumentNumber(updatedSupplierData.getDocumentNumber());
+        existingSupplier.setAddress(updatedSupplierData.getAddress());
+        existingSupplier.setContactPhone(updatedSupplierData.getContactPhone());
+        existingSupplier.setContactEmail(updatedSupplierData.getContactEmail());
+        existingSupplier.setPaymentTerms(updatedSupplierData.getPaymentTerms());
+        existingSupplier.setBankAccountInfo(updatedSupplierData.getBankAccountInfo());
+        existingSupplier.setSupplierRating(updatedSupplierData.getSupplierRating());
+
+        SupplierEntity savedEntity = supplierRepository.save(existingSupplier);
+
+        return supplierMapper.toDTO(savedEntity); // aqui a mágica: retorna DTO!
+    }
+
+
+
+    @Transactional
     public void deleteSupplier(Long id) {
         SupplierEntity supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Fornecedor não encontrado com id: " + id));

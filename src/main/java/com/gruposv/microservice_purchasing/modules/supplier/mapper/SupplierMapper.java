@@ -16,7 +16,9 @@ public class SupplierMapper {
         return new SupplierDTO(
                 entity.getId(),
                 entity.getName(),
-                entity.getDocumentNumber()
+                entity.getDocumentNumber(),
+                entity.getAddress(),
+                entity.getContactPhone()
         );
     }
 }

@@ -12,5 +12,7 @@ public class SupplierDTO {
     private Long supplierId;
     private String supplierName;
     private String documentNumber;
+    private String address;
+    private String contactPhone;
 }
 
