@@ -21,6 +21,7 @@ import com.gruposv.microservice_purchasing.modules.supplier_documents.entity.Sup
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_suppliers")
+@Where(clause = "deleted_at IS NULL") // só retorna registros não deletados
 public class SupplierEntity {
 
     @Id
@@ -55,4 +56,15 @@ public class SupplierEntity {
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SupplierDocumentsEntity> supplierDocuments;
 
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 }
+

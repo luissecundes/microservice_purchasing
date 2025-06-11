@@ -2,8 +2,10 @@ package com.gruposv.microservice_purchasing.modules.supplier.service;
 
 import com.gruposv.microservice_purchasing.modules.supplier.dto.SupplierDTO;
 import com.gruposv.microservice_purchasing.modules.supplier.mapper.SupplierMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,13 @@ public class SupplierService {
                 .toList();
     }
 
+    @Transactional
     public void deleteSupplier(Long id) {
-        supplierRepository.deleteById(id);
+        SupplierEntity supplier = supplierRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Fornecedor não encontrado com id: " + id));
+
+        supplier.setDeletedAt(LocalDateTime.now());
+        supplierRepository.save(supplier);
     }
+
 }
