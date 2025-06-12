@@ -79,7 +79,17 @@ O application-prod.properties já está configurado para usar variáveis de ambi
 
 O arquivo `.env.example` está disponível como template para o seu `.env` (não versionado por questões de segurança =D).   
 
-Obs: Lembre-se de que o ambiente com docker, pode ser improdutivo, dado que a cada mudança no código, precisará ser criada uma nova imagem e um novo container.
+Obs: Lembre-se de que o ambiente com docker, pode ser improdutivo, dado que a cada mudança no código, precisará ser criada uma nova imagem e um novo container.   
+Nesse caso, você precisará seguir os comando abaixo para poder visualizar as mudanças que fez:   
+
+````
+docker-compose down (desfazer o container)
+docker-compose --build (recriar a imagem)
+docker-compose up (subir o container novamente)
+````
+
+Isso se deve ao fato do Java gerar um `.jar` → a imagem é criada com base no `.jar` → ao mudar o código, é necessário rebuildar e subir novo container.
+
 
 ### 🌍 Estrutura de Profiles
 
