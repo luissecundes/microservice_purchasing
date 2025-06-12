@@ -34,6 +34,26 @@ public class PoApprovalsService {
                 .map(mapper::toDTO)
                 .toList();
     }
+    @Transactional
+    public PoApprovalsDTO update(Long id, PoApprovalsDTO updatedDTO) {
+        PoApprovalsEntity existingApproval = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("PoApproval não encontrado com id: " + id));
+
+        existingApproval.setApprovedBy(updatedDTO.getApprovedBy());
+        existingApproval.setApprovalDate(updatedDTO.getApprovalDate());
+        existingApproval.setStatus(updatedDTO.getStatus());
+        existingApproval.setComments(updatedDTO.getComments());
+
+        if (!existingApproval.getPurchaseOrder().getId().equals(updatedDTO.getPurchaseOrderId())) {
+            var newPurchaseOrder = new com.gruposv.microservice_purchasing.modules.purchase_orders.entity.PurchaseOrdersEntity();
+            newPurchaseOrder.setId(updatedDTO.getPurchaseOrderId());
+            existingApproval.setPurchaseOrder(newPurchaseOrder);
+        }
+
+        PoApprovalsEntity savedEntity = repository.save(existingApproval);
+
+        return mapper.toDTO(savedEntity);
+    }
 
     @Transactional
     public void delete(Long id) {

@@ -33,6 +33,13 @@ public class PoApprovalsController {
         return ResponseEntity.ok(list);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<PoApprovalsDTO> update(@PathVariable Long id, @RequestBody PoApprovalsDTO updatedDTO) {
+        PoApprovalsDTO updatedApproval = service.update(id, updatedDTO);
+        return ResponseEntity.ok(updatedApproval);
+    }
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         service.delete(id);
