@@ -42,6 +42,12 @@ public class PurchaseOrdersController {
         return ResponseEntity.ok(purchaseOrdersService.getAllDTO());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<PurchaseOrderDTO> updatePurchaseOrder(@PathVariable Long id, @RequestBody PurchaseOrderDTO updatedDTO) {
+        PurchaseOrderDTO updatedOrder = purchaseOrdersService.updatePurchaseOrder(id, updatedDTO);
+        return ResponseEntity.ok(updatedOrder);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, String>> delete(@PathVariable Long id) {
     purchaseOrdersService.delete(id);
