@@ -66,15 +66,20 @@ spring.datasource.password=sua-senha
 ````
 
 ### 2️⃣ Ambiente com Docker (produção, homologação, CI/CD)
-Quando você quiser rodar a aplicação com o banco MySQL já via Docker:
+Quando você quiser rodar a aplicação com o banco MySQL já via Docker:  
+Navegue até a pasta do projeto, rode os comando a seguir porém não se esqueça de conferir suas credenciais no `.env`.   
+Também verifique se as portas que está utilizando para requisição estão corretas (Docker: 8089)   
 
 ````
-docker-compose up --build
+docker-compose --build (criar a imagem)
+docker-compose up (subir o container)
 ````
 
 O application-prod.properties já está configurado para usar variáveis de ambiente (`SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, etc).
 
-O arquivo .env.example está disponível como template para o seu .env (não versionado por questões de segurança =D).
+O arquivo `.env.example` está disponível como template para o seu `.env` (não versionado por questões de segurança =D).   
+
+Obs: Lembre-se de que o ambiente com docker, pode ser improdutivo, dado que a cada mudança no código, precisará ser criada uma nova imagem e um novo container.
 
 ### 🌍 Estrutura de Profiles
 
