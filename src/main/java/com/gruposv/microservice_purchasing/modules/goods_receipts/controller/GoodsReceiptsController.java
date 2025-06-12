@@ -1,5 +1,6 @@
 package com.gruposv.microservice_purchasing.modules.goods_receipts.controller;
 
+import com.gruposv.microservice_purchasing.modules.goods_receipts.dto.GoodsReceiptsDTO;
 import com.gruposv.microservice_purchasing.modules.goods_receipts.entity.GoodsReceiptsEntity;
 import com.gruposv.microservice_purchasing.modules.goods_receipts.service.GoodsReceiptsService;
 
@@ -21,20 +22,23 @@ public class GoodsReceiptsController {
     }
 
     @PostMapping
-    public ResponseEntity<GoodsReceiptsEntity> create(@RequestBody GoodsReceiptsEntity receipt) {
-        GoodsReceiptsEntity saved = service.save(receipt);
+    public ResponseEntity<GoodsReceiptsDTO> create(@RequestBody GoodsReceiptsDTO receiptDTO) {
+        GoodsReceiptsDTO saved = service.save(receiptDTO);
         return ResponseEntity.ok(saved);
     }
 
-
-    // GET ALL
     @GetMapping
-    public ResponseEntity<List<GoodsReceiptsEntity>> getAll() {
-        List<GoodsReceiptsEntity> list = service.getAll();
+    public ResponseEntity<List<GoodsReceiptsDTO>> getAll() {
+        List<GoodsReceiptsDTO> list = service.getAll();
         return ResponseEntity.ok(list);
     }
 
-    // DELETE com mensagem
+    @PutMapping("/{id}")
+    public ResponseEntity<GoodsReceiptsDTO> update(@PathVariable Long id, @RequestBody GoodsReceiptsDTO updatedDTO) {
+        GoodsReceiptsDTO updated = service.update(id, updatedDTO);
+        return ResponseEntity.ok(updated);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         service.delete(id);
