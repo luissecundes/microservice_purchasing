@@ -22,6 +22,7 @@ import com.gruposv.microservice_purchasing.modules.supplier_documents.entity.Sup
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_suppliers")
+@Where(clause = "deleted_at IS NULL")
 public class SupplierEntity extends TimestampEntity {
 
     @Id

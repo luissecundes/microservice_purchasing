@@ -1,5 +1,6 @@
 package com.gruposv.microservice_purchasing.modules.goods_receipt_items.entity;
 
+import com.gruposv.microservice_purchasing.domain.TimestampEntity;
 import com.gruposv.microservice_purchasing.modules.goods_receipts.entity.GoodsReceiptsEntity;
 import com.gruposv.microservice_purchasing.modules.purchase_order_items.entity.PurchaseOrderItemsEntity;
 import jakarta.persistence.*;
@@ -7,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
 
@@ -16,7 +18,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_goods_receipt_items")
-public class GoodsReceiptItemsEntity {
+@Where(clause = "deleted_at IS NULL")
+public class GoodsReceiptItemsEntity extends TimestampEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

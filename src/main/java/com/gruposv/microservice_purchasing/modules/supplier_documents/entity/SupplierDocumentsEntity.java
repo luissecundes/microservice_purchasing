@@ -21,6 +21,7 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_suppliers_documents")
+@Where(clause = "deleted_at IS NULL")
 public class SupplierDocumentsEntity extends TimestampEntity {
 
     @Id

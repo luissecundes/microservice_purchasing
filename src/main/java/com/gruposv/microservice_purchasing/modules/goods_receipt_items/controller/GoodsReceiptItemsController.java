@@ -1,5 +1,6 @@
 package com.gruposv.microservice_purchasing.modules.goods_receipt_items.controller;
 
+import com.gruposv.microservice_purchasing.modules.goods_receipt_items.dto.GoodsReceiptItemsDTO;
 import com.gruposv.microservice_purchasing.modules.goods_receipt_items.entity.GoodsReceiptItemsEntity;
 import com.gruposv.microservice_purchasing.modules.goods_receipt_items.service.GoodsReceiptItemsService;
 
@@ -21,19 +22,22 @@ public class GoodsReceiptItemsController {
     }
 
     @PostMapping
-    public ResponseEntity<GoodsReceiptItemsEntity> create(@RequestBody GoodsReceiptItemsEntity item) {
-        GoodsReceiptItemsEntity saved = service.save(item);
+    public ResponseEntity<GoodsReceiptItemsDTO> create(@RequestBody GoodsReceiptItemsDTO dto) {
+        GoodsReceiptItemsDTO saved = service.save(dto);
         return ResponseEntity.ok(saved);
     }
 
-    // GET ALL
     @GetMapping
-    public ResponseEntity<List<GoodsReceiptItemsEntity>> getAll() {
-        List<GoodsReceiptItemsEntity> list = service.getAll();
-        return ResponseEntity.ok(list);
+    public ResponseEntity<List<GoodsReceiptItemsDTO>> getAll() {
+        return ResponseEntity.ok(service.getAll());
     }
 
-    // DELETE com mensagem
+    @PutMapping("/{id}")
+    public ResponseEntity<GoodsReceiptItemsDTO> update(@PathVariable Long id, @RequestBody GoodsReceiptItemsDTO updatedDTO) {
+        GoodsReceiptItemsDTO updated = service.update(id, updatedDTO);
+        return ResponseEntity.ok(updated);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         service.delete(id);

@@ -5,6 +5,7 @@ import com.gruposv.microservice_purchasing.modules.po_approvals.enums.PoApproval
 import com.gruposv.microservice_purchasing.modules.purchase_orders.entity.PurchaseOrdersEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_po_approvals")
+@Where(clause = "deleted_at IS NULL")
 public class PoApprovalsEntity extends TimestampEntity {
 
     @Id
