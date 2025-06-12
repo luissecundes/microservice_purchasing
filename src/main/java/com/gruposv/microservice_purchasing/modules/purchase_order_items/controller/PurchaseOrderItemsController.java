@@ -1,5 +1,6 @@
 package com.gruposv.microservice_purchasing.modules.purchase_order_items.controller;
 
+import com.gruposv.microservice_purchasing.modules.purchase_order_items.dto.PurchaseOrderItemsDTO;
 import com.gruposv.microservice_purchasing.modules.purchase_order_items.entity.PurchaseOrderItemsEntity;
 import com.gruposv.microservice_purchasing.modules.purchase_order_items.service.PurchaseOrderItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +23,28 @@ public class PurchaseOrderItemsController {
     }
 
     @PostMapping
-    public ResponseEntity<PurchaseOrderItemsEntity> create(@RequestBody PurchaseOrderItemsEntity item) {
-        PurchaseOrderItemsEntity saved = service.save(item);
+    public ResponseEntity<PurchaseOrderItemsDTO> create(@RequestBody PurchaseOrderItemsDTO dto) {
+        PurchaseOrderItemsDTO saved = service.save(dto);
         return ResponseEntity.ok(saved);
     }
 
     @GetMapping
-    public ResponseEntity<List<PurchaseOrderItemsEntity>> getAll() {
+    public ResponseEntity<List<PurchaseOrderItemsDTO>> getAll() {
         return ResponseEntity.ok(service.findAll());
     }
 
-   @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, String>> delete(@PathVariable Long id) {
-    service.deleteById(id);
-    Map<String, String> response = new HashMap<>();
-    response.put("message", "Item com id " + id + " foi deletado com sucesso.");
-     return ResponseEntity.ok(response);
-}
+    @PutMapping("/{id}")
+    public ResponseEntity<PurchaseOrderItemsDTO> update(@PathVariable Long id, @RequestBody PurchaseOrderItemsDTO updatedDTO) {
+        PurchaseOrderItemsDTO updatedItem = service.updatePurchaseOrderItem(id, updatedDTO);
+        return ResponseEntity.ok(updatedItem);
+    }
 
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, String>> delete(@PathVariable Long id) {
+        service.deleteById(id);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Item com id " + id + " foi deletado com sucesso.");
+        return ResponseEntity.ok(response);
+    }
 }
