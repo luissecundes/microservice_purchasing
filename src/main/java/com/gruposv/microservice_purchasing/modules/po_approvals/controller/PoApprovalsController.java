@@ -1,5 +1,6 @@
 package com.gruposv.microservice_purchasing.modules.po_approvals.controller;
 
+import com.gruposv.microservice_purchasing.modules.po_approvals.dto.PoApprovalsDTO;
 import com.gruposv.microservice_purchasing.modules.po_approvals.entity.PoApprovalsEntity;
 import com.gruposv.microservice_purchasing.modules.po_approvals.service.PoApprovalsService;
 import java.util.List;
@@ -21,19 +22,17 @@ public class PoApprovalsController {
     }
 
     @PostMapping
-    public ResponseEntity<PoApprovalsEntity> create(@RequestBody PoApprovalsEntity approval) {
-        PoApprovalsEntity saved = service.save(approval);
+    public ResponseEntity<PoApprovalsDTO> create(@RequestBody PoApprovalsDTO dto) {
+        PoApprovalsDTO saved = service.save(dto);
         return ResponseEntity.ok(saved);
     }
 
-    // GET ALL
     @GetMapping
-    public ResponseEntity<List<PoApprovalsEntity>> getAll() {
-        List<PoApprovalsEntity> list = service.getAll();
+    public ResponseEntity<List<PoApprovalsDTO>> getAll() {
+        List<PoApprovalsDTO> list = service.getAll();
         return ResponseEntity.ok(list);
     }
 
-    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         service.delete(id);

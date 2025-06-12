@@ -1,5 +1,7 @@
 package com.gruposv.microservice_purchasing.modules.po_approvals.entity;
 
+import com.gruposv.microservice_purchasing.domain.TimestampEntity;
+import com.gruposv.microservice_purchasing.modules.po_approvals.enums.PoApprovalStatus;
 import com.gruposv.microservice_purchasing.modules.purchase_orders.entity.PurchaseOrdersEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_po_approvals")
-public class PoApprovalsEntity {
+public class PoApprovalsEntity extends TimestampEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,13 +32,9 @@ public class PoApprovalsEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 20)
-    private Status status;
+    private PoApprovalStatus status;
 
     @Column(name = "comments", columnDefinition = "TEXT")
     private String comments;
 
-    public enum Status {
-        APROVADO,
-        REJEITADO
-    }
 }
